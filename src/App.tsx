@@ -1,25 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useRef } from "react";
+import { useUserState } from "./state/user";
 
 function App() {
+  const { resetData, setData } = useUserState();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleReset = () => {
+    resetData();
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="flex flex-col items-center justify-center h-screen">
+      <UserCard />
+      <div className="flex">
+        <input
+          ref={inputRef}
+          onChange={(e) => setData({ name: e.target.value })}
+          className="rounded-md border-2 border-grayscale-700 bg-grayscale-700 px-2 py-1 text-white shadow-lg outline-none  focus:border-primary-500"
+        />
+        <button
+          onClick={handleReset}
+          className="rounded-md bg-gradient-to-r from-blue-500 to-blue-900 px-6 py-2 font-semibold"
         >
-          Learn React
-        </a>
-      </header>
+          Reset
+        </button>
+      </div>
     </div>
+  );
+}
+
+function UserCard() {
+  const { data } = useUserState();
+  return (
+    <>
+      <h1 className="text-xl font-bold mb-1">{data?.name}</h1>
+    </>
   );
 }
 
