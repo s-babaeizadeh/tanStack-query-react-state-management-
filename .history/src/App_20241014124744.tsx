@@ -20,11 +20,11 @@ function App() {
         <input
           ref={inputRef}
           onChange={(e) => setData({ name: e.target.value })}
-          className="rounded-md border-2 border-grayscale-700  px-2 py-1 text-black shadow-lg outline-none  focus:border-primary-500 border-none"
+          className="rounded-md border-2 border-grayscale-700  px-2 py-1 text-white shadow-lg outline-none  focus:border-primary-500"
         />
         <button
           onClick={handleReset}
-          className="rounded-md bg-gradient-to-r bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 font-semibold"
+          className="rounded-md bg-gradient-to-r from-blue-500 to-blue-900 px-6 py-2 font-semibold"
         >
           Reset
         </button>
